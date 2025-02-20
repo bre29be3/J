@@ -1,0 +1,622 @@
+local StarterGui = game:GetService("StarterGui")
+local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SoundService = game:GetService("SoundService")
+local Lighting = game:GetService("Lighting")
+local TextChatService = game:GetService("TextChatService")
+local PathfindingService = game:GetService("PathfindingService")
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+local materials = {
+  Enum.Material.WoodPlanks,
+}
+
+local function changePartMaterial(part)
+    local randomMaterial = materials[math.random(1, #materials)]
+    part.Material = randomMaterial
+end
+
+local function changeMaterials()
+    for _, part in ipairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.Color = Color3.fromRGB(64, 64, 64)
+            changePartMaterial(part)
+        end
+    end
+end
+
+HookHelper = loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAcceleration/Comet-Development/refs/heads/main/Doors/Utility/DoorsScriptUtility.lua"))()
+SyncHelper = loadstring(game:HttpGet("https://github.com/ChronoAcceleration/Comet-Development/raw/refs/heads/main/Doors/Utility/SyncHelper.lua"))()
+local entityHook = EntityHook:New()
+
+HookHelper = loadstring(game:HttpGet("https://raw.githubusercontent.com/ChronoAcceleration/Comet-Development/refs/heads/main/Doors/Utility/DoorsScriptUtility.lua"))()
+SyncHelper = loadstring(game:HttpGet("https://github.com/ChronoAcceleration/Comet-Development/raw/refs/heads/main/Doors/Utility/SyncHelper.lua"))()
+local entityHook = EntityHook:New()
+
+-- Noticement
+--firesignal(game.ReplicatedStorage.Bricks.Caption.OnClientEvent, "Script made by iCherryKardes. You might need to reexecute if you are at door 51.")
+
+local Candle = game:GetObjects("rbxassetid://11630702537")[1]
+		Candle.Parent = game.Players.LocalPlayer.Backpack
+		local plr = game.Players.LocalPlayer
+		local Char = plr.Character or plr.CharacterAdded:Wait()
+		local Hum = Char:FindFirstChild("Humanoid")
+		local RightArm = Char:FindFirstChild("RightUpperArm")
+		local LeftArm = Char:FindFirstChild("LeftUpperArm")
+		local RightC1 = RightArm.RightShoulder.C1
+		local LeftC1 = LeftArm.LeftShoulder.C1
+		local AnimIdle = Instance.new("Animation")
+		AnimIdle.AnimationId = "rbxassetid://9982615727"
+		AnimIdle.Name = "IDleloplolo"
+		local cam = workspace.CurrentCamera
+		Candle.Handle.Top.Flame.GuidingLighteffect.EffectLight.LockedToPart = true
+		Candle.Handle.Material = Enum.Material.Salt
+		local track = Hum.Animator:LoadAnimation(AnimIdle)
+		track.Looped = true
+		local Equipped = false
+		for i, v in pairs(Candle:GetDescendants()) do
+			if v:IsA("BasePart") then
+				v.CanCollide = false
+			end
+			if v:IsA("Light") then
+			    v.Range = 30
+		        v.Brightness += 1
+			end
+		end
+		Candle.Equipped:Connect(function()
+			for _, v in next, Hum:GetPlayingAnimationTracks() do
+				v:Stop()
+			end
+			Equipped = true
+        -- RightArm.Name = "R_Arm"
+			track:Play()
+        -- RightArm.RightShoulder.C1 = RightC1 * CFrame.Angles(math.rad(-90), math.rad(-15), 0)
+		end)
+		Candle.Unequipped:Connect(function()
+			RightArm.Name = "RightUpperArm"
+			track:Stop()
+			Equipped = false
+        -- RightArm.RightShoulder.C1 = RightC1
+		end)
+		cam.ChildAdded:Connect(function(screech)
+			if screech.Name == "Screech" then
+				if not Equipped then
+					return
+				end
+				if Equipped then
+					game:GetService("Debris"):AddItem(screech, 0.05)
+				end
+			end
+		end)
+            entityHook:On("Eyes", function(eyesModel)
+                         if not Equipped then
+					return
+				end
+				if Equipped then
+				game:GetService("Debris"):AddItem(screech, 0.05)
+			end
+            end)
+           entityHook:On("Rush", function(eyesModel)
+                         if not Equipped then
+					return
+				end
+				if Equipped then
+				game:GetService("Debris"):AddItem(screech, 0.05)
+			end
+            end)
+            entityHook:On("Ambush", function(eyesModel)
+                         if not Equipped then
+					return
+				end
+				if Equipped then
+				game:GetService("Debris"):AddItem(screech, 0.05)
+			end
+            end)
+
+		Candle.TextureId = "rbxassetid://11622366799"
+
+Candle.Parent = game.Players.LocalPlayer.Backpack
+
+local LiveCaption = loadstring(game:HttpGet('https://pastebin.com/raw/VJs4yXRm'))()
+QuickFunctions = HookHelper.QuickFunctions
+local roomHook = HookHelper.RoomHook:New()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local function runGuidingLight(Text: table, Type: string): ()
+	local RemotesFolder = ReplicatedStorage.RemotesFolder
+	local DeathHint = RemotesFolder.DeathHint
+
+	firesignal(DeathHint.OnClientEvent, Text, Type)
+end
+
+local function a90()
+       task.wait(3)
+	local playerdetected = false
+	local iamattacking = false
+
+	local screenGui = Instance.new("ScreenGui")
+	screenGui.Parent = player:WaitForChild("PlayerGui")
+
+	local imageLabel = Instance.new("ImageLabel")
+	imageLabel.Parent = screenGui
+	imageLabel.Size = UDim2.new(0, 200, 0, 200)
+	imageLabel.Position = UDim2.new(0, 0, 0, 0)
+	imageLabel.Image = "rbxassetid://17726275272" 
+	screenGui.Enabled = true
+	imageLabel.BackgroundTransparency = 1
+	imageLabel.ImageTransparency = 0
+
+	local sound = Instance.new("Sound", game.Workspace)
+	sound.SoundId = "rbxassetid://106278886549808" 
+	sound.EmitterSize = 5
+	sound.Looped = false
+	sound.Parent = game.Workspace
+	sound:Play()
+	sound.Volume = 5
+
+	task.wait(0.50)
+
+local UserInputService = game:GetService("UserInputService")
+
+local function onTouchMoved(input, gameProcessedEvent)
+    if gameProcessedEvent then
+        -- Ignore if the event is already processed
+        return
+    end
+
+    if input.UserInputType == Enum.UserInputType.Touch then
+        -- Handle the touch movement, such as printing position
+        playerdetected = true
+    end
+end
+
+-- Listen for the TouchMoved event
+UserInputService.TouchMoved:Connect(onTouchMoved)
+
+	UserInputService.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseMovement then
+			playerdetected = true 
+		end
+	end)
+
+character.Humanoid.Running:Connect(function(speed)
+    if speed > 0 then
+        playerdetected = true
+    end
+end)
+
+	task.wait(0.50)
+	playerdetected = false
+	iamattacking = true
+	imageLabel.Position = UDim2.new(0.5, -100, 0.5, -100)
+
+	task.wait(0.50)
+	if playerdetected == true then 
+		character.Humanoid:TakeDamage(80)
+	end
+	iamattacking = false
+	screenGui.Enabled = false
+end
+
+local responses = {"I think we should go left..", "I think we should go right..", "Proceed forward.", "None of them are correct, backtrack to where you came from"}
+
+function executetext()
+	local poop = {
+		"Misfortune has snuck up on to you, and you have been dragged down to hell.",
+		"As you make your way through the reception room, you wonder if you are alone.",
+		"You soon realize you are not.",
+		"There are hungry beings in this hellscape. Hide, defend, and run until door 100.",
+		"Goodluck."
+	}
+
+	for _, Text in ipairs(poop) do
+		require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption(Text, true)
+		task.wait(4)
+	end
+end
+
+local isRunning = false
+local isRoomLocked = false
+game:GetService("GuiService").TouchControlsEnabled = false
+local speedsterchance = 5
+
+local sound = Instance.new("Sound", game.Workspace)
+sound.SoundId = "rbxassetid://101724323124983" 
+sound.EmitterSize = 5
+sound.Looped = true
+sound.Parent = game.Workspace
+sound:Play()
+sound.Volume = 0.01
+game.Lighting.FogEnd = 50
+game.Lighting.FogStart = 10
+game.Lighting.OutdoorAmbient = Color3.fromRGB(60, 60, 60)
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Button1 = Instance.new("TextButton")
+local Button2 = Instance.new("TextButton")
+local Button3 = Instance.new("TextButton")
+
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+Frame.Parent = ScreenGui
+Frame.Size = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+
+Button1.Parent = Frame
+Button1.Size = UDim2.new(0.3, 0, 0.2, 0)
+Button1.Position = UDim2.new(0.1, 0, 0.1, 0)
+Button1.Text = "intermediate"
+
+Button2.Parent = Frame
+Button2.Size = UDim2.new(0.3, 0, 0.2, 0)
+Button2.Position = UDim2.new(0.1, 0, 0.4, 0)
+Button2.Text = "medium"
+
+Button3.Parent = Frame
+Button3.Size = UDim2.new(0.3, 0, 0.2, 0)
+Button3.Position = UDim2.new(0.1, 0, 0.7, 0)
+Button3.Text = "جحيم"
+
+local function closeGuiez()
+    game:GetService("GuiService").TouchControlsEnabled = true
+    speedsterchance = 20
+    ScreenGui:Destroy()
+    executetext()
+end
+
+local function closeGuimd()
+   game:GetService("GuiService").TouchControlsEnabled = true
+    speedsterchance = 15
+    isRunning = true
+    ScreenGui:Destroy()
+    executetext()
+end
+
+local function closeGuihc()
+   game:GetService("GuiService").TouchControlsEnabled = true
+   speedsterchance = 10
+    isRunning = true
+    ScreenGui:Destroy()
+    executetext()
+end
+
+Button1.MouseButton1Click:Connect(closeGuiez)
+Button2.MouseButton1Click:Connect(closeGuimd)
+Button3.MouseButton1Click:Connect(closeGuihc)
+
+roomHook:On("ServerRoomChanged", function(roomModel)
+if game.ReplicatedStorage.GameData.LatestRoom.Value == 51 then
+changeMaterials()
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).titlelocation("The Unfinished Doors")
+end
+
+if game.ReplicatedStorage.GameData.LatestRoom.Value >= 51 then
+changeMaterials()
+workspace.CurrentRooms[tostring(game.ReplicatedStorage.GameData.LatestRoom.Value)].Assets.Light_Fixtures:Destroy()
+end
+
+local hellonumber = math.random(1, 25)
+if hellonumber == 25 and game.ReplicatedStorage.GameData.LatestRoom.Value >= 51 then
+      a90()
+end
+
+local hellonumber2 = math.random(1, 5)
+if hellonumber2 == 3 then 
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("You find a bag of chips on the ground.", true)
+       local tool = game:GetObjects("rbxassetid://11979782807")[1]
+		tool.Parent = game.Players.LocalPlayer.Backpack
+                tool.Activated:Connect(function()
+                           local crunch = Instance.new("Sound", game.Workspace)
+crunch.SoundId = "rbxassetid://618667795" 
+crunch.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+crunch.Looped = false
+crunch.Parent = game.Workspace
+crunch:Play()
+crunch.Volume = 5
+                              tool:Destroy()
+        end)
+end
+
+if roomModel:FindFirstChild("SideroomDupe") then
+local msg = responses[math.random(1,#responses)]
+      QuickFunctions:CoreNotification({
+    Title = "NON PERSONNEL ENTITY DETECTED.",
+    Text = msg,
+    Duration = 3
+})
+end
+
+if roomModel.Name == "10" then
+isRunning = false
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+achievementGiver({
+    Title = "Cant Keep My Eyes Off You",
+    Desc = "And stay out!",
+    Reason = "Survive the Gatekeeper.",
+    Image = "rbxassetid://13769107799"
+})
+elseif roomModel.Name ~= "10" and isRunning == true then
+       isRoomLocked = false
+               local door = roomModel.Door:WaitForChild("Door")
+        local newgui = Instance.new("BillboardGui")
+        local newimage = Instance.new("ImageLabel")
+        newgui.Parent = door
+        newimage.Parent = door.BillboardGui
+        newimage.Image = "http://www.roblox.com/asset/?id= 13377332330"
+        newgui.Size = UDim2.new(0, 100, 0, 100)
+        newimage.Size = UDim2.new(0, 100, 0, 100) game.Players.LocalPlayer.Character.Humanoid.Health = 100
+end
+
+local RandomNumber = SyncHelper:generateFullRandom(1, speedsterchance,  tonumber(roomModel.Name))
+    
+    if RandomNumber ~= 1 or roomModel.Name == "1" or roomModel.Name == "2" or roomModel.Name == "3" or roomModel.Name == "4" or roomModel.Name == "5" then
+        return
+    end
+    
+    local part = Instance.new("Part")
+    part.Anchored = true
+part.Transparency = 1
+part.Parent = game.Workspace
+local sound = Instance.new("Sound", part)
+sound.SoundId = "rbxassetid://9043345732" 
+sound.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+sound.Looped = true
+sound.Parent = part
+local isAttacking = true
+sound.Volume = 10
+local newgui = Instance.new("BillboardGui")
+        local newimage = Instance.new("ImageLabel")
+        newgui.Parent = part
+        newimage.Parent = part.BillboardGui
+        newimage.Image = "http://www.roblox.com/asset/?id= 12001502218"
+        newgui.Size = UDim2.new(0, 100, 0, 100)
+        newimage.Size = UDim2.new(0, 100, 0, 100)
+    local OldestRoom = game.Workspace.CurrentRooms:GetChildren()[1]
+    local OldestDoor = OldestRoom.Door
+    part:PivotTo(OldestDoor:GetPivot())
+    
+    local TS = game:GetService("TweenService")
+    local Door = roomModel.Door:GetPivot()
+    local Tween = TS:Create(part, TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 2), {Position = Door.Position})
+    Tween:Play()
+sound:Play()
+
+    RunService.Heartbeat:Connect(function()
+        if character and character:FindFirstChild("Humanoid") then
+            local distance = (part.Position - character.HumanoidRootPart.Position).Magnitude
+
+            if distance <= 45 and not character:GetAttribute("Hiding") and isAttacking == true then
+
+runGuidingLight(
+						{
+							"Greetings.",
+"Hmm",
+							"You died to who you call the Speedster.",
+"Id reckon you hide when it screams closer, its basically just a faster rush"
+						},
+						"Blue"
+					)
+
+                character.Humanoid:TakeDamage(character.Humanoid.Health) -- Kills the player
+            end
+        end
+Tween.Completed:Connect(function()
+part:Destroy()
+isAttacking = false
+      end)
+   end)
+end)
+
+roomHook:On("ServerRoomChanged", function(roomModel)
+local RandomNumber = SyncHelper:generateFullRandom(1, 80, tonumber(roomModel.Name))
+    
+    if RandomNumber ~= 3 or roomModel.Name == "9" or roomModel.Name == "8" or roomModel.Name == "7" or roomModel.Name == "6" or roomModel.Name == "5" or roomModel.Name == "4" or roomModel.Name == "3" or roomModel.Name == "2" or roomModel.Name == "1" and not workspace:FindFirstChild("Seek") then
+        return
+    end
+   local part = Instance.new("Part")
+    part.Anchored = true
+part.Transparency = 1
+part.Parent = game.Workspace
+local sound = Instance.new("Sound", part)
+sound.SoundId = "rbxassetid://5710016194" 
+sound.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+sound.Looped = true
+sound.Parent = part
+local isAttacking2 = true
+local newgui = Instance.new("BillboardGui")
+        local newimage = Instance.new("ImageLabel")
+        newgui.Parent = part
+        newimage.Parent = part.BillboardGui
+        newimage.Image = "http://www.roblox.com/asset/?id= 13014144241"
+        newgui.Size = UDim2.new(0, 100, 0, 100)
+        newimage.Size = UDim2.new(0, 100, 0, 100)
+    local OldestRoom = game.Workspace.CurrentRooms:GetChildren()[1]
+    local OldestDoor = OldestRoom.Door
+    part:PivotTo(OldestDoor:GetPivot())
+    local rebound = math.random(2, 4)
+    local TS = game:GetService("TweenService")
+    local Door = roomModel.Door:GetPivot()
+    local Tween = TS:Create(part, TweenInfo.new(10, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, rebound, true, 2), {Position = Door.Position})
+    Tween:Play()
+sound:Play()
+
+    RunService.Heartbeat:Connect(function()
+        if character and character:FindFirstChild("Humanoid") then
+            local distance = (part.Position - character.HumanoidRootPart.Position).Magnitude
+
+            if distance <= 50 and not character:GetAttribute("Hiding") and isAttacking2 == true then
+
+runGuidingLight(
+						{
+"Hmm..",
+							"You died to who you call Rage..",
+"Use what you learnt from rush and ambush!"
+						},
+						"Blue"
+					)
+
+                character.Humanoid:TakeDamage(character.Humanoid.Health) -- Kills the player
+            end
+        end
+Tween.Completed:Connect(function()
+part:Destroy()
+isAttacking2 = false
+      end)
+   end)
+end)
+
+roomHook:On("ServerRoomChanged", function(roomModel)
+local RandomNumber = SyncHelper:generateFullRandom(1, 65,  tonumber(roomModel.Name))
+    
+    if RandomNumber ~= 2 or roomModel.Name == "9" or roomModel.Name == "8" or roomModel.Name == "7" or roomModel.Name == "6" or roomModel.Name == "5" or roomModel.Name == "4" or roomModel.Name == "3" or roomModel.Name == "2" or roomModel.Name == "1" then
+        return
+    end
+   local part = Instance.new("Part")
+    part.Anchored = true
+part.Transparency = 1
+part.Parent = game.Workspace
+local sound = Instance.new("Sound", part)
+local breathe = Instance.new("Sound", part)
+breathe.SoundId = "rbxassetid://2868217282" 
+breathe.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+breathe.Looped = false
+breathe.Parent = part
+breathe.Volume = 1
+sound.SoundId = "rbxassetid://1840784387" 
+sound.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+sound.Volume = 7
+sound.Looped = true
+sound.Parent = part
+local isAttacking3 = true
+local newgui = Instance.new("BillboardGui")
+        local newimage = Instance.new("ImageLabel")
+        newgui.Parent = part
+        newimage.Parent = part.BillboardGui
+        newimage.Image = "http://www.roblox.com/asset/?id= 12650020367"
+        newgui.Size = UDim2.new(0, 100, 0, 100)
+        newimage.Size = UDim2.new(0, 100, 0, 100)
+newimage.BackgroundTransparency = 1
+    local OldestRoom = game.Workspace.CurrentRooms:GetChildren()[1]
+    local OldestDoor = OldestRoom.Door
+    part:PivotTo(OldestDoor:GetPivot())
+    local rebound2 = math.random(0, 3)
+    local TS = game:GetService("TweenService")
+    local Door = roomModel.Door:GetPivot()
+    local Tween = TS:Create(part, TweenInfo.new(10, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, rebound2, false, 10), {Position = Door.Position})
+character:WaitForChild("Humanoid").WalkSpeed = 9
+    Tween:Play()
+sound:Play()
+
+    RunService.Heartbeat:Connect(function()
+        if character and character:FindFirstChild("Humanoid") then
+            local distance = (part.Position - character.HumanoidRootPart.Position).Magnitude
+
+while distance <= 65 do
+       task.wait(1)
+       breathe:Play()
+end
+
+            if distance <= 50 and not character:GetAttribute("Hiding") and isAttacking3 == true then
+
+runGuidingLight(
+						{
+							"Oh, hello",
+"Hmm..",
+							"She said we should call that one..insidae.",
+"It comes back a few times.",
+"You’ll get used to it.", 
+"See you later?",
+"Haha, of course I will.",
+"You always come back."
+						},
+						"Yellow"
+					)
+
+                character.Humanoid:TakeDamage(character.Humanoid.Health) -- Kills the player
+            end
+        end
+Tween.Completed:Connect(function()
+character:WaitForChild("Humanoid").WalkSpeed = 16
+part:Destroy()
+isAttacking3 = false
+     end)
+   end)
+end)
+
+roomHook:On("ServerRoomChanged", function(roomModel)
+local RandomNumber = SyncHelper:generateFullRandom(1, 30, tonumber(roomModel.Name))
+    
+    if RandomNumber ~= 6 or roomModel.Name == "5" or roomModel.Name == "4" or roomModel.Name == "3" or roomModel.Name == "2" or roomModel.Name == "1" then
+        return
+    end
+   local part = Instance.new("Part")
+    part.Anchored = true
+part.Transparency = 1
+part.Parent = game.Workspace
+local sound = Instance.new("Sound", part)
+sound.SoundId = "rbxassetid://9125714014" 
+sound.EmitterSize = 5 -- decrease the emitter size (for earlier volume drop off)
+sound.Looped = false
+sound.Volume = 10
+sound.Parent = part
+local isAttacking4 = true
+local newgui = Instance.new("BillboardGui")
+        local newimage = Instance.new("ImageLabel")
+        newgui.Parent = part
+        newimage.Parent = part.BillboardGui
+        newimage.Image = "http://www.roblox.com/asset/?id= 14846131564"
+        newgui.Size = UDim2.new(0, 100, 0, 100)
+        newimage.Size = UDim2.new(0, 100, 0, 100)
+    local OldestRoom = game.Workspace.CurrentRooms:GetChildren()[1]
+    local OldestDoor = OldestRoom.Door
+    part:PivotTo(OldestDoor:GetPivot())
+    local rebound = 0
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption("im coming",true)
+    wait(10)
+    local TS = game:GetService("TweenService")
+    local Door = roomModel.Door:GetPivot()
+    local Tween = TS:Create(part, TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, rebound, false, 2), {Position = Door.Position})
+    Tween:Play()
+sound:Play()
+
+    RunService.Heartbeat:Connect(function()
+        if character and character:FindFirstChild("Humanoid") then
+            local distance = (part.Position - character.HumanoidRootPart.Position).Magnitude
+
+            if distance <= 50 and not character:GetAttribute("Hiding") and isAttacking4 == true then
+
+runGuidingLight(
+						{
+"Unfortunate.",
+							"You died to the singularity.",
+"It’s loud as hell, I don’t know how you didn’t hear it.",
+"Good luck on your endeavors, I suppose."
+						},
+						"Yellow"
+					)
+
+                character.Humanoid:TakeDamage(character.Humanoid.Health) -- Kills the player
+            end
+        end
+Tween.Completed:Connect(function()
+part:Destroy()
+isAttacking4 = false
+      end)
+   end)
+end)
+
+roomHook:On("LockedRoom", function(roomModel)
+   task.wait(1)
+   isRoomLocked = true
+end)
+
+while true do 
+task.wait(1)
+if isRoomLocked == false and isRunning == true then
+game.Players.LocalPlayer.Character.Humanoid:TakeDamage(3)
+end
+end
