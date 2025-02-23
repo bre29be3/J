@@ -1,0 +1,63 @@
+local Tool = Instance.new("Tool")
+Tool.Name = "NightVision"
+Tool.RequiresHandle = false
+Tool.TextureId = "rbxassetid://82844911841292"
+Tool.Parent = game.Players.LocalPlayer.Backpack
+
+local function applyGreenScreenEffect()
+    local player = game.Players.LocalPlayer
+    local playerGui = player:WaitForChild("PlayerGui")
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = playerGui
+    screenGui.ResetOnSpawn = false
+
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.Position = UDim2.new(0, 0, 0, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    frame.BackgroundTransparency = 0.3
+    frame.ZIndex = 9999
+    frame.Parent = screenGui
+
+    local lighting = game:GetService("Lighting")
+    lighting.Brightness = 3
+    lighting.FogEnd = math.huge
+    lighting.FogStart = 0
+    lighting.FogColor = Color3.fromRGB(0, 255, 0)
+
+    for _, obj in ipairs(game:GetDescendants()) do
+        if obj:IsA("Light") then
+            obj.Brightness = 1.5
+            obj.Range = 30
+        end
+    end
+end
+
+local function revertGreenScreenEffect()
+    local lighting = game:GetService("Lighting")
+    lighting.Brightness = 2
+    lighting.FogEnd = 1000
+    lighting.FogStart = 0
+    lighting.FogColor = Color3.fromRGB(255, 255, 255)
+
+    for _, obj in ipairs(game:GetDescendants()) do
+        if obj:IsA("Light") then
+            obj.Brightness = 2
+            obj.Range = 20
+        end
+    end
+
+    local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    local screenGui = playerGui:FindFirstChild("ScreenGui")
+    if screenGui then
+        screenGui:Destroy()
+    end
+end
+
+Tool.Equipped:Connect(function()
+    applyGreenScreenEffect()
+end)
+
+Tool.Unequipped:Connect(function()
+    revertGreenScreenEffect()
+end)
