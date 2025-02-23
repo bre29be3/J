@@ -1,0 +1,93 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local ScannerObjectives = {
+    "KeyObtain",
+    "LeverForGate",
+    "LiveBreakerPolePickup",
+    "LiveHintBook",
+    "FuseObtain",
+    "MinesAnchor",
+    "WaterPump",
+    "TimerLever"
+}
+
+local tool = Instance.new("Tool")
+tool.Name = "Key Tracker"
+tool.RequiresHandle = true
+tool.Parent = Players.LocalPlayer.Backpack
+
+local handle = Instance.new("Part")
+handle.Name = "Handle"
+handle.Size = Vector3.new(1, 1, 1)
+handle.Material = Enum.Material.Metal
+handle.Color = Color3.fromRGB(50, 50, 50)
+handle.Parent = tool
+
+local light = Instance.new("PointLight", handle)
+light.Brightness = 2
+light.Range = 15
+light.Color = Color3.fromRGB(255, 0, 0)
+
+local idleAnim = Instance.new("Animation")
+idleAnim.AnimationId = "rbxassetid://10526835827"
+idleAnim.Parent = tool
+
+local function getTrackableParts()
+    local trackableParts = {}
+    for _, obj in pairs(game:GetDescendants()) do
+        if table.find(ScannerObjectives, obj.Name) then
+            for _, child in ipairs(obj:GetDescendants()) do
+                if child:IsA("BasePart") then
+                    table.insert(trackableParts, child)
+                end
+            end
+        end
+    end
+    return trackableParts
+end
+
+local function createMarkers()
+    local markers = {}
+    local trackableParts = getTrackableParts()
+    for _, part in ipairs(trackableParts) do
+        if not part:FindFirstChild("RedMarker") then
+            local billboard = Instance.new("BillboardGui")
+            billboard.Name = "RedMarker"
+            billboard.Size = UDim2.new(0, 10, 0, 10)
+            billboard.AlwaysOnTop = true
+            billboard.Adornee = part
+            billboard.Parent = part
+
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            frame.BorderSizePixel = 0
+            frame.Parent = billboard
+
+            table.insert(markers, billboard)
+        end
+    end
+    return markers
+end
+
+local function removeMarkers()
+    for _, obj in ipairs(game:GetDescendants()) do
+        if obj:IsA("BillboardGui") and obj.Name == "RedMarker" then
+            obj:Destroy()
+        end
+    end
+end
+
+tool.Equipped:Connect(function()
+    local humanoid = Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+    if humanoid then
+        local animTrack = humanoid:LoadAnimation(idleAnim)
+        animTrack:Play()
+    end
+    createMarkers()
+end)
+
+tool.Unequipped:Connect(function()
+    removeMarkers()
+end)
