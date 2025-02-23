@@ -1,0 +1,84 @@
+local function createGiggleTool()
+    local tool = Instance.new("Tool")
+    tool.Name = "Giggle"
+    tool.RequiresHandle = true
+    tool.Parent = game.Players.LocalPlayer.Backpack
+
+    local handle = Instance.new("Part")
+    handle.Name = "Handle"
+    handle.Size = Vector3.new(2, 2, 2)
+    handle.Anchored = false
+    handle.CanCollide = false
+    handle.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 2, 0)
+    handle.Parent = tool
+    handle.Transparency = 1
+
+    local faces = {"Front", "Back", "Left", "Right", "Top", "Bottom"}
+
+    for _, face in ipairs(faces) do
+        local surface = handle:FindFirstChild(face)
+        if not surface then
+            surface = Instance.new("SurfaceGui")
+            surface.Face = Enum.NormalId[face]
+            surface.Parent = handle
+        end
+        local image = Instance.new("ImageLabel")
+        image.Image = "rbxassetid://139681984012530"
+        image.Size = UDim2.new(1, 0, 1, 0)
+        image.BackgroundTransparency = 1
+        image.Parent = surface
+    end
+
+    tool.TextureId = "rbxassetid://139681984012530"
+
+    local shearSounds = {
+        "rbxassetid://17740288119",
+        "rbxassetid://17740287715",
+        "rbxassetid://17740288275"
+    }
+
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://18885062142"
+
+    local function playRandomSound()
+        local soundPlaying = false
+        while tool.Parent do
+            if not soundPlaying then
+                local soundId = shearSounds[math.random(1, #shearSounds)]
+                local sound = Instance.new("Sound")
+                sound.SoundId = soundId
+                sound.Parent = handle
+                sound:Play()
+                soundPlaying = true
+                sound.Ended:Wait()
+                soundPlaying = false
+            end
+            wait(2)
+        end
+    end
+
+    tool.Equipped:Connect(function()
+        local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+        local animTrack = humanoid:LoadAnimation(animation)
+        animTrack:Play()
+        spawn(playRandomSound)
+    end)
+
+    tool.Unequipped:Connect(function()
+        for _, sound in ipairs(handle:GetChildren()) do
+            if sound:IsA("Sound") then
+                sound:Stop()
+                sound:Destroy()
+            end
+        end
+        local humanoid = game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
+        if humanoid then
+            local animTrack = humanoid:FindFirstChildOfClass("AnimationTrack")
+            if animTrack then
+                animTrack:Stop()
+            end
+        end
+    end)
+end
+
+createGiggleTool()
