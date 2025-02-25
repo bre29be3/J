@@ -1,0 +1,90 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local highlightColor = Color3.new(1, 0, 0)
+local explosionSoundId = "rbxassetid://3802269741"
+local explosionTimeLimit = 1200
+
+local function applyToolEffects(tool)
+    if tool.Name == "Lighter" then
+        local handle = tool:FindFirstChild("Handle")
+        if handle then
+            handle.Color = Color3.new(1, 0, 0)
+            local soundOpen = handle:FindFirstChild("sound_open")
+            if soundOpen and soundOpen:IsA("Sound") then
+                soundOpen.SoundId = explosionSoundId
+            end
+
+            for _, descendant in ipairs(handle:GetDescendants()) do
+                if descendant:IsA("BasePart") or descendant:IsA("ParticleEmitter") or descendant:IsA("PointLight") then
+                    descendant.Color = Color3.new(1, 0, 0)
+                    if descendant:IsA("ParticleEmitter") then
+                        descendant.Texture = "rbxassetid://110886007258155"
+                    elseif descendant:IsA("PointLight") then
+                        descendant.Color = Color3.new(1, 0, 0)
+                        descendant.Brightness = 1.5
+                        descendant.Range = 16
+                    end
+                end
+            end
+        end
+
+        tool.TextureId = "rbxassetid://112508503632935"
+
+        task.spawn(function()
+            local heldTime = 0
+            while tool and tool.Parent and Players.LocalPlayer.Character:FindFirstChild(tool.Name) do
+                task.wait(1)
+                heldTime = heldTime + 1
+                if heldTime >= explosionTimeLimit then
+                    local explosion = Instance.new("Explosion")
+                    explosion.Position = Players.LocalPlayer.Character.HumanoidRootPart.Position
+                    explosion.Parent = workspace
+                    local explosionSound = Instance.new("Sound")
+                    explosionSound.SoundId = explosionSoundId
+                    explosionSound.PlayOnRemove = true
+                    explosionSound.Parent = explosion
+                    explosionSound:Destroy()
+                    Players.LocalPlayer.Character.Humanoid.Health = 0
+                end
+            end
+        end)
+    end
+end
+
+local function highlightFakeDoors()
+    for _, model in ipairs(workspace:GetDescendants()) do
+        if model:IsA("Model") and model.Name == "DoorFake" then
+            for _, part in ipairs(model:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.FillColor = highlightColor
+                    highlight.OutlineTransparency = 1
+                    highlight.Parent = part
+                end
+            end
+        end
+    end
+
+    workspace.DescendantAdded:Connect(function(descendant)
+        if descendant:IsA("Model") and descendant.Name == "DoorFake" then
+            for _, part in ipairs(descendant:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    local highlight = Instance.new("Highlight")
+                    highlight.FillColor = highlightColor
+                    highlight.OutlineTransparency = 1
+                    highlight.Parent = part
+                end
+            end
+        end
+    end)
+end
+
+Players.LocalPlayer.Backpack.ChildAdded:Connect(applyToolEffects)
+workspace.DescendantAdded:Connect(function(descendant)
+    if descendant:IsA("Tool") then
+        applyToolEffects(descendant)
+    end
+end)
+
+highlightFakeDoors()
