@@ -45,4 +45,4 @@ local function caption(text)
 		newText:Destroy()
 	end)
 end
-caption("Arrogance Mode Actived!")
+caption("W🤑elcome To Our Doors Hub!🤑")
