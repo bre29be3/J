@@ -45,4 +45,4 @@ local function caption(text)
 		newText:Destroy()
 	end)
 end
-caption("W🤑elcome To Our Doors Hub!🤑")
+caption("🤑Welcome To Our Doors Hub!🤑")
