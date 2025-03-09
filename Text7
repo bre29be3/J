@@ -45,4 +45,4 @@ local function caption(text)
 		newText:Destroy()
 	end)
 end
-caption("Inspired By Anzor")
+caption("Inspired By Some Modes")
