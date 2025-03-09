@@ -51,7 +51,7 @@ coroutine.wrap(function()
         wait(90)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Greance"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/BLINDY"))()
     end
 end)()
 
@@ -61,7 +61,7 @@ coroutine.wrap(function()
         wait(150)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Bluyer'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Greance1'))()
     end
 end)()
 
