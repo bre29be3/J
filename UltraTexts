@@ -1,5 +1,5 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/J/refs/heads/main/Text5"))()
-wait(5)
+wait(2)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/J/refs/heads/main/Text6"))()
-wait(5)
+wait(2)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/J/refs/heads/main/Text7"))()
