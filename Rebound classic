@@ -1,0 +1,460 @@
+local entityModel = true
+ 
+if game.Workspace:FindFirstChild("SeekMovingNewClone") or game.ReplicatedStorage.GameData.LatestRoom.Value == 50 or game.ReplicatedStorage.GameData.LatestRoom.Value == 51 or game.ReplicatedStorage.GameData.LatestRoom.Value == 52 or workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value].Assets:FindFirstChild("ShopProps") or game.ReplicatedStorage.GameData.LatestRoom.Value == 90 or game.ReplicatedStorage.GameData.LatestRoom.Value == 91 or game.ReplicatedStorage.GameData.LatestRoom.Value == 92 or game.ReplicatedStorage.GameData.LatestRoom.Value == 93 or game.ReplicatedStorage.GameData.LatestRoom.Value == 94 or game.ReplicatedStorage.GameData.LatestRoom.Value == 95 or game.ReplicatedStorage.GameData.LatestRoom.Value == 96 or game.ReplicatedStorage.GameData.LatestRoom.Value == 97 or game.ReplicatedStorage.GameData.LatestRoom.Value == 98 or game.ReplicatedStorage.GameData.LatestRoom.Value == 99 or game.ReplicatedStorage.GameData.LatestRoom.Value == 100 then
+ 
+entityModel = false
+ 
+end
+ 
+if entityModel then
+
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(61, 98, 171)
+game.Lighting.MainColorCorrection.Contrast = 0.2
+game.Lighting.MainColorCorrection.Saturation = -0.5
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(5), {Contrast = 0}):Play()
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(5), {Saturation = 0}):Play()
+local TweenService = game:GetService("TweenService")
+local TW = TweenService:Create(game.Lighting.MainColorCorrection, TweenInfo.new(5),{TintColor = Color3.fromRGB(255, 255, 255)})
+TW:Play()
+local cue1 = Instance.new("Sound")
+cue1.Parent = game.Workspace
+cue1.Name = "Scream"
+cue1.SoundId = "rbxassetid://9114397505"
+local distort = Instance.new("DistortionSoundEffect")
+distort.Parent = cue1
+distort.Level = 1
+local distort2 = Instance.new("DistortionSoundEffect")
+distort2.Parent = cue1
+distort2.Level = 1
+local pitch = Instance.new("PitchShiftSoundEffect")
+pitch.Parent = cue1
+pitch.Octave = 0.5
+local pitch2 = Instance.new("PitchShiftSoundEffect")
+pitch2.Parent = cue1
+pitch2.Octave = 0.5
+local pitch3 = Instance.new("PitchShiftSoundEffect")
+pitch3.Parent = cue1
+pitch3.Octave = 0.5
+cue1.Volume = 0.1
+cue1:Play()
+local cue2 = Instance.new("Sound")
+cue2.Parent = game.Workspace
+cue2.Name = "Spawn"
+cue2.SoundId = "rbxassetid://9114221327"
+cue2.Volume = 3
+cue2:Play()
+local CameraShaker = require(game.ReplicatedStorage.CameraShaker)
+local camara = game.Workspace.CurrentCamera
+local camShake = CameraShaker.new(Enum.RenderPriority.Camera.Value, function(shakeCf)
+	camara.CFrame = camara.CFrame * shakeCf
+end)
+camShake:Start()
+camShake:ShakeOnce(10,3,0.1,6,2,0.5)
+for _, v in pairs(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:GetDescendants()) do
+ if v.Name == "PointLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "SpotLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "Neon" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ end
+end
+wait(2.8)
+---====== Define spawner ======---
+ 
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+ 
+---====== Create entity ======---
+ 
+local entity = Spawner.createEntity({
+    CustomName = "Rebound",
+    Model = "rbxassetid://12847597717",
+    Speed = 125,
+    MoveDelay = 2,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 0
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1.5,
+        Delay = 2
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true
+})
+ 
+---====== Debug ======---
+ 
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+game.ReplicatedStorage.GameData.LatestRoom.Changed: Wait()
+wait(0.0001)
+local spawn_nm = Instance.new("Sound", workspace)
+ spawn_nm.SoundId = "rbxassetid://5857559198"
+ spawn_nm.Volume = 5000
+ spawn_nm:Play()
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(0.7), {Contrast = 0}):Play()
+local TweenService = game:GetService("TweenService")
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(0, 255, 255)
+game.Lighting.MainColorCorrection.Contrast = 1
+end
+ 
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawned")
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+wait(0.0001)
+---====== Define spawner ======---
+ 
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+ 
+---====== Create entity ======---
+ 
+local entity = Spawner.createEntity({
+    CustomName = "Rebound",
+    Model = "rbxassetid://12847597717",
+    Speed = 125,
+    MoveDelay = 2,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 0
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1.5,
+        Delay = 2
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true
+})
+ 
+---====== Debug ======---
+ 
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+for _, v in pairs(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:GetDescendants()) do
+ if v.Name == "PointLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "SpotLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "Neon" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ end
+end
+end
+ 
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawned")
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+wait(0.0001)
+---====== Define spawner ======---
+ 
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+ 
+---====== Create entity ======---
+ 
+local entity = Spawner.createEntity({
+    CustomName = "Rebound",
+    Model = "rbxassetid://12847597717",
+    Speed = 125,
+    MoveDelay = 2,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 0
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1.5,
+        Delay = 2
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true
+})
+ 
+---====== Debug ======---
+ 
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+for _, v in pairs(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:GetDescendants()) do
+ if v.Name == "PointLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "SpotLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "Neon" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ end
+end
+end
+ 
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawned")
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+wait(0.0001)
+---====== Define spawner ======---
+ 
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Entity%20Spawner/V1/Source.lua"))()
+ 
+---====== Create entity ======---
+ 
+local entity = Spawner.createEntity({
+    CustomName = "Rebound",
+    Model = "rbxassetid://12847597717",
+    Speed = 125,
+    MoveDelay = 2,
+    HeightOffset = 0,
+    CanKill = true,
+    KillRange = 50,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = false,
+        Duration = 0
+    },
+    Cycles = {
+        Min = 1,
+        Max = 1.5,
+        Delay = 2
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = false,
+    BreakCrucifix = true
+})
+ 
+---====== Debug ======---
+ 
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+for _, v in pairs(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]:GetDescendants()) do
+ if v.Name == "PointLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "SpotLight" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ elseif v.Name == "Neon" then
+  local TweenService = game:GetService("TweenService")
+  local TW = TweenService:Create(v, TweenInfo.new(1),{Color = Color3.fromRGB(85, 255, 255)})
+  TW:Play()
+ end
+end
+end
+ 
+entity.Debug.OnEntityDespawned = function()
+    print("Entity has despawned")
+---====== Load achievement giver ======---
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+ 
+---====== Display achievement ======---
+achievementGiver({
+    Title = "No Respawn",
+    Desc = "I'M WATCHING YOU",
+    Reason = "Encounter Rebound",
+    Image = "rbxassetid://136371046752100"
+})
+
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+
+local spawn_nm = Instance.new("Sound", workspace)
+ spawn_nm.PlaybackSpeed = 0.9
+ spawn_nm.SoundId = "rbxassetid://5857559198"
+ spawn_nm.Volume = 5000
+ spawn_nm:Play()
+local tween = game:GetService("TweenService")
+tween:Create(game.Lighting.MainColorCorrection, TweenInfo.new(0.3), {Contrast = 0}):Play()
+game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(255, 255, 255)
+game.Lighting.MainColorCorrection.Contrast = 1
+end
+ 
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+ 
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+ 
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+ 
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+ 
+entity.Debug.OnDeath = function()
+    print("Player has died")
+firesignal(game.ReplicatedStorage.RemotesFolder.DeathHint.OnClientEvent, {"You died to Rebound", "It appears at the next door and has a chance to stay there or run back to the latest door", "He will come back many times after his initial spawn so hide every next door until it is safe..."}, "Blue") -- "Blue" or "Yellow"
+end
+ 
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+ 
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+ 
+---====== Run entity ======---
+ 
+Spawner.runEntity(entity)
+end
+ 
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+ 
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+ 
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+ 
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+ 
+entity.Debug.OnDeath = function()
+    print("Player has died")
+firesignal(game.ReplicatedStorage.RemotesFolder.DeathHint.OnClientEvent, {"You died to Rebound", "It appears at the next door and has a chance to stay there or run back to the latest door", "He will come back many times after his initial spawn so hide every next door until it is safe..."}, "Blue") -- "Blue" or "Yellow"
+end
+ 
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+ 
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+ 
+---====== Run entity ======---
+ 
+Spawner.runEntity(entity)
+end
+ 
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+ 
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+ 
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+ 
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+ 
+entity.Debug.OnDeath = function()
+    print("Player has died")
+firesignal(game.ReplicatedStorage.RemotesFolder.DeathHint.OnClientEvent, {"You died to Rebound", "It appears at the next door and has a chance to stay there or run back to the latest door", "He will come back many times after his initial spawn so hide every next door until it is safe..."}, "Blue") -- "Blue" or "Yellow"
+end
+ 
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+ 
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+ 
+---====== Run entity ======---
+ 
+Spawner.runEntity(entity)
+end
+ 
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+
+end
+ 
+entity.Debug.OnEntityFinishedRebound = function()
+    print("Entity finished rebound")
+end
+ 
+entity.Debug.OnEntityEnteredRoom = function(room)
+    print("Entity entered room:", room)
+end
+ 
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+ 
+entity.Debug.OnDeath = function()
+    print("Player has died")
+firesignal(game.ReplicatedStorage.RemotesFolder.DeathHint.OnClientEvent, {"You died to Rebound", "It appears at the next door and has a chance to stay there or run back to the latest door", "He will come back many times after his initial spawn so hide every next door until it is safe..."}, "Blue") -- "Blue" or "Yellow"
+end
+ 
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+ 
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+ 
+---====== Run entity ======---
+ 
+Spawner.runEntity(entity)
+
+end
