@@ -51,7 +51,7 @@ coroutine.wrap(function()
         wait(90)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/57e7i2hg"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Greance"))()
     end
 end)()
 
@@ -61,7 +61,7 @@ coroutine.wrap(function()
         wait(150)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet('https://pastebin.com/raw/WH4WDvjh'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Bluyer'))()
     end
 end)()
 
@@ -71,7 +71,7 @@ coroutine.wrap(function()
         wait(190)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet('https://pastebin.com/raw/hntcsyYz'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Bluyer'))()
     end
 end)()
 
@@ -81,7 +81,7 @@ coroutine.wrap(function()
         wait(215)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet('https://pastebin.com/raw/bPYb1Kqw'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/236'))()
     end
 end)()
 
@@ -91,7 +91,7 @@ coroutine.wrap(function()
         wait(250)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/gGkR8RMc"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/350"))()
     end
 end)()
 
@@ -149,7 +149,7 @@ coroutine.wrap(function()
         wait(320)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-        loadstring(game:HttpGet('https://pastebin.com/raw/5vLfqSWa'))()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Huntering'))()
     end
 end)()
 
@@ -164,7 +164,7 @@ local sctm = math.random(350,15000)
 wait(sctm)
  
 require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption('Secret entity did not dangerous',true)
-loadstring(game:HttpGet("https://pastebin.com/raw/Z504KNtF"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/E-60"))()
  
 end
  
@@ -175,7 +175,7 @@ coroutine.wrap(function()
     while true do
         wait(600)
          game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
-loadstring(game:HttpGet("https://pastebin.com/raw/KpqhHcyx"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/A-60"))()
  
 end
  
@@ -187,7 +187,7 @@ coroutine.wrap(function()
         wait(440)
          game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/uNnkcsGU"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Silence"))()
 
 end
     
@@ -199,7 +199,7 @@ coroutine.wrap(function()
         wait(620)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/a9km8DA5"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Hunger"))()
 
 end
 
@@ -211,7 +211,7 @@ coroutine.wrap(function()
         wait(210)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/2zugvBgY"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/B60"))()
 
 end
 
@@ -223,7 +223,7 @@ coroutine.wrap(function()
         wait(290)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/P1nudihg"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/Bundger"))()
 
 end
 
@@ -235,7 +235,7 @@ coroutine.wrap(function()
         wait(230)
         game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
         wait(0)
-loadstring(game:HttpGet("https://pastebin.com/raw/PRWXYuTb"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/bre29be3/Doors-Modes/refs/heads/main/A-10"))()
 
 end
 
