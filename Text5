@@ -45,4 +45,4 @@ local function caption(text)
 		newText:Destroy()
 	end)
 end
-caption("Arrogance Mode Actived!")
+caption("Superiority Mode Actived!")
