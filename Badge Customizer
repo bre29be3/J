@@ -1,0 +1,91 @@
+local player = game:GetService("Players").LocalPlayer
+local playerGui = player.PlayerGui
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+screenGui.Name = "CustomNameUI"
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.Parent = screenGui
+frame.Active = true
+frame.Draggable = true
+
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 30)
+topBar.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
+topBar.Position = UDim2.new(0, 0, 0, 0)
+topBar.Parent = frame
+
+local topBarText = Instance.new("TextLabel")
+topBarText.Size = UDim2.new(1, 0, 1, 0)
+topBarText.Text = "temokote's doors custom badges"
+topBarText.TextColor3 = Color3.fromRGB(255, 255, 255)
+topBarText.TextSize = 14
+topBarText.TextXAlignment = Enum.TextXAlignment.Center
+topBarText.TextYAlignment = Enum.TextYAlignment.Center
+topBarText.BackgroundTransparency = 1
+topBarText.Parent = topBar
+
+local instructions = Instance.new("TextLabel")
+instructions.Size = UDim2.new(0, 280, 0, 30)
+instructions.Position = UDim2.new(0, 10, 0, 40)
+instructions.Text = "Enter badge name and ID"
+instructions.TextColor3 = Color3.fromRGB(255, 255, 255)
+instructions.TextSize = 12
+instructions.TextXAlignment = Enum.TextXAlignment.Center
+instructions.TextYAlignment = Enum.TextYAlignment.Center
+instructions.BackgroundTransparency = 1
+instructions.Parent = frame
+
+local badgeNameBox = Instance.new("TextBox")
+badgeNameBox.Size = UDim2.new(0, 280, 0, 30)
+badgeNameBox.Position = UDim2.new(0, 10, 0, 70)
+badgeNameBox.PlaceholderText = "Enter Badge Name"
+badgeNameBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+badgeNameBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+badgeNameBox.Parent = frame
+
+local badgeIdBox = Instance.new("TextBox")
+badgeIdBox.Size = UDim2.new(0, 280, 0, 30)
+badgeIdBox.Position = UDim2.new(0, 10, 0, 110)
+badgeIdBox.PlaceholderText = "Enter Badge ID (leave empty for black)"
+badgeIdBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+badgeIdBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+badgeIdBox.Parent = frame
+
+local confirmButton = Instance.new("TextButton")
+confirmButton.Size = UDim2.new(0, 280, 0, 30)
+confirmButton.Position = UDim2.new(0, 10, 0, 150)
+confirmButton.Text = "Confirm Changes"
+confirmButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+confirmButton.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
+confirmButton.Parent = frame
+
+confirmButton.MouseButton1Click:Connect(function()
+    local customBadgeName = badgeNameBox.Text
+    local customBadgeId = badgeIdBox.Text
+
+    if customBadgeName == "" then
+        warn("Please enter a badge name.")
+        return
+    end
+
+    local badgeId = customBadgeId == "" and "rbxassetid://0" or "rbxassetid://" .. customBadgeId
+
+    local uiElement = playerGui:FindFirstChild("NameUI" .. player.Name)
+    if uiElement then
+        local stuff = uiElement:WaitForChild("Stuff")
+        local frame = stuff:WaitForChild("Frame")
+
+        local textLabel = frame:WaitForChild("TextBadge")
+        textLabel.Text = customBadgeName
+
+        local iconBadge = frame:WaitForChild("IconBadge")
+        iconBadge.Image = badgeId
+    else
+        warn("NameUI not found.")
+    end
+end)
